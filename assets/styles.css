@@ -197,6 +197,22 @@ pre {
   margin: 0 auto;
 }
 
+#overview-grid .media-card {
+  overflow: visible;
+}
+
+#overview-grid .media-frame {
+  aspect-ratio: auto;
+  padding: 18px;
+  background: #ffffff;
+}
+
+#overview-grid .media-frame img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 .media-card {
   border: 1px solid var(--line);
   border-radius: var(--radius);
