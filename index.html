@@ -8,77 +8,169 @@
       name="description"
       content="Project page for Learning Neutral Identity Representations for Single-Image Head Animation."
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.24/dist/css/bulma-carousel.min.css"
+    />
     <link rel="stylesheet" href="assets/styles.css" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.24/dist/js/bulma-carousel.min.js"
+    ></script>
+    <script defer src="assets/main.js"></script>
   </head>
   <body>
-    <main class="site-shell">
-      <section class="publication-header">
-        <h1 class="publication-title">
-          <span class="title-line">Learning Neutral Identity Representations</span>
-          <span class="title-line">for Single-Image Head Animation</span>
-        </h1>
-      </section>
-
-      <section class="hero-teaser">
-        <div id="teaser-grid" class="media-grid media-grid-single"></div>
-      </section>
-
-      <section class="section-block abstract-block">
-        <h2 class="section-title">Abstract</h2>
-        <div class="prose">
-          <p>
-            Reconstructing animatable 3D head avatars from a single image is challenging, as the reconstructed
-            avatar must preserve the subject’s identity while accurately reproducing target facial expressions.
-            Existing one-shot avatar methods typically animate avatars directly from representations reconstructed
-            from the input image. Since the input image inevitably contains facial expressions, the reconstructed
-            representation often entangles identity with source expressions, leading to residual source-expression
-            leakage that interferes with target motion during reenactment.
-          </p>
-          <p>
-            To address this issue, we propose learning a Neutral Identity Representation (NIR) for single-image
-            head animation. Instead of directly animating the reconstructed source avatar, our method first restores
-            the input head into the NIR, a canonical expression-neutral identity state that removes
-            expression-dependent variations while preserving identity-specific geometry and appearance. This
-            representation serves as the identity-only foundation for subsequent animation, preventing
-            source-expression interference when new expressions are introduced.
-          </p>
-          <p>
-            Building upon this representation, we introduce a two-stage deformation pipeline for expression transfer.
-            A coarse 3DMM-driven deformation first produces anatomically consistent facial motion, followed by an
-            identity-aware refinement module that injects identity-specific geometric details into the Gaussian avatar
-            representation. Experiments demonstrate that our approach significantly reduces source-expression leakage
-            and achieves more accurate and identity-consistent reenactment compared to existing one-shot avatar
-            methods.
-          </p>
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered hero-column">
+              <img id="hero-logo" class="hero-logo is-hidden" alt="Project logo" />
+              <h1 class="title is-3 publication-title">
+                Learning Neutral Identity Representations<br />
+                for Single-Image Head Animation
+              </h1>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section-block">
-        <h2 class="section-title">Method Overview</h2>
-        <div class="pipeline-grid">
-          <article class="pipeline-card">
-            <h3>1. Reconstruct the source head</h3>
-            <p>Recover a controllable avatar representation from a single input portrait.</p>
-          </article>
-          <article class="pipeline-card">
-            <h3>2. Restore Neutral Identity Representation</h3>
-            <p>Remove source-expression bias while preserving identity-specific shape and appearance.</p>
-          </article>
-          <article class="pipeline-card">
-            <h3>3. Transfer and refine expression</h3>
-            <p>Apply coarse 3DMM motion first, then recover identity-aware geometric details.</p>
-          </article>
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <div id="teaser-media"></div>
+          <h2 id="teaser-caption" class="subtitle has-text-centered section-caption is-hidden"></h2>
         </div>
+      </div>
+    </section>
 
-        <div id="overview-grid" class="media-grid media-grid-single"></div>
-      </section>
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified abstract-copy">
+              <p>
+                Reconstructing animatable 3D head avatars from a single image is challenging, as the reconstructed
+                avatar must preserve the subject’s identity while accurately reproducing target facial expressions.
+                Existing one-shot avatar methods typically animate avatars directly from representations reconstructed
+                from the input image. Since the input image inevitably contains facial expressions, the reconstructed
+                representation often entangles identity with source expressions, leading to residual source-expression
+                leakage that interferes with target motion during reenactment.
+              </p>
+              <p>
+                To address this issue, we propose learning a Neutral Identity Representation (NIR) for single-image
+                head animation. Instead of directly animating the reconstructed source avatar, our method first restores
+                the input head into the NIR, a canonical expression-neutral identity state that removes
+                expression-dependent variations while preserving identity-specific geometry and appearance. This
+                representation serves as the identity-only foundation for subsequent animation, preventing
+                source-expression interference when new expressions are introduced.
+              </p>
+              <p>
+                Building upon this representation, we introduce a two-stage deformation pipeline for expression transfer.
+                A coarse 3DMM-driven deformation first produces anatomically consistent facial motion, followed by an
+                identity-aware refinement module that injects identity-specific geometric details into the Gaussian avatar
+                representation. Experiments demonstrate that our approach significantly reduces source-expression leakage
+                and achieves more accurate and identity-consistent reenactment compared to existing one-shot avatar
+                methods.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <section class="section-block">
-        <h2 class="section-title">Qualitative Results</h2>
-        <div id="video-carousel" class="video-carousel"></div>
-      </section>
-    </main>
+    <section class="hero is-small">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <h2 class="title is-3 section-title">Overview</h2>
+          <div id="overview-media"></div>
+          <h2 id="overview-caption" class="subtitle is-max-desktop section-caption is-hidden"></h2>
+        </div>
+      </div>
+    </section>
 
-    <script src="assets/main.js"></script>
+    <section class="hero is-small is-light">
+      <div class="hero-body">
+        <div class="the-canvas rounded card viewer-card">
+          <h2 class="title is-3 viewer-title">Interactive Viewer</h2>
+          <div id="interactive-viewer"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero is-small">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <h2 class="title is-3 section-title">Method</h2>
+          <div id="method-primary"></div>
+          <h2 id="method-primary-caption" class="subtitle is-max-desktop section-caption is-hidden"></h2>
+        </div>
+      </div>
+
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <h2 class="title is-4 section-subtitle">Morphable Multi-view Diffusion Model (MMDM)</h2>
+          <div id="method-secondary"></div>
+          <h2 id="method-secondary-caption" class="subtitle is-max-desktop section-caption is-hidden"></h2>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero is-small is-light">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <h2 class="title is-3 section-title">Gallery</h2>
+          <h2 id="gallery-caption" class="subtitle is-max-desktop section-caption is-hidden"></h2>
+          <div id="gallery-carousel" class="carousel results-carousel"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero is-small">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <h2 class="title is-3 section-title">Baseline Comparisons</h2>
+          <h2 id="baseline-intro" class="subtitle is-max-desktop section-caption is-hidden"></h2>
+          <div id="baseline-carousel-a" class="carousel results-carousel"></div>
+          <h2 id="baseline-caption-a" class="subtitle is-max-desktop section-caption is-hidden"></h2>
+          <div id="baseline-carousel-b" class="carousel results-carousel"></div>
+          <h2 id="baseline-caption-b" class="subtitle is-max-desktop section-caption is-hidden"></h2>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero is-small is-light">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <h2 class="title is-3 section-title">More Results</h2>
+          <div class="more-results-stack">
+            <div class="more-results-block">
+              <h2 class="title is-4 section-subtitle">Effect of reference image quantity</h2>
+              <div id="more-results-a" class="more-results-grid"></div>
+            </div>
+            <div class="more-results-block">
+              <h2 class="title is-4 section-subtitle">Editing of appearance and lighting</h2>
+              <div id="more-results-b" class="more-results-grid"></div>
+            </div>
+            <div class="more-results-block">
+              <h2 class="title is-4 section-subtitle">4D animation from audio</h2>
+              <div id="more-results-c" class="more-results-grid"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </body>
 </html>

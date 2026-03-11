@@ -1,314 +1,352 @@
 const pageConfig = {
-  links: {
-    paper: "",
-    code: "",
-    supplementaryPdf: "",
-    arxiv: "",
+  heroLogo: "",
+  teaser: {
+    kind: "image",
+    src: "assets/media/images/teaser.png",
+    poster: "",
+    caption: "",
   },
-  teaser: [
-    {
-      kind: "auto",
-      title: "",
-      description: "",
-      src: "assets/media/images/teaser.png",
-      poster: "",
-      expectedPath: "assets/media/images/teaser.png",
-    },
-  ],
-  overviewFigure: [
-    {
+  overview: {
+    kind: "image",
+    src: "assets/media/images/method-2.png",
+    poster: "",
+    caption: "",
+  },
+  interactiveViewer: {
+    referenceImage: "",
+    fallbackVideo: "",
+    thumbnails: 18,
+  },
+  method: {
+    primary: {
       kind: "image",
-      title: "",
-      description: "",
       src: "assets/media/images/method-2.png",
-      expectedPath: "assets/media/images/method-2.png",
+      poster: "",
+      caption: "",
     },
-  ],
-  videos: [
-    {
-      kind: "video",
-      title: "Case 42",
-      description: "Recomposed panel with the correct source image, segmented driver, and segmented result.",
-      src: "assets/media/videos/obama_42_recomposed.mp4",
-      poster: "assets/media/images/obama_42_recomposed_poster.png",
-      expectedPath: "assets/media/videos/obama_42_recomposed.mp4",
+    secondary: {
+      kind: "image",
+      src: "",
+      poster: "",
+      caption: "",
     },
-    {
-      kind: "video",
-      title: "Case ave1",
-      description: "Recomposed panel with the correct source image, segmented driver, and segmented result.",
-      src: "assets/media/videos/obama_ave1_recomposed.mp4",
-      poster: "assets/media/images/obama_ave1_recomposed_poster.png",
-      expectedPath: "assets/media/videos/obama_ave1_recomposed.mp4",
+  },
+  gallery: {
+    caption: "",
+    slides: [
+      {
+        title: "Case 42",
+        rows: [
+          { kind: "image", src: "assets/media/images/42.png", label: "source image" },
+          { kind: "placeholder", label: "" },
+          {
+            kind: "video",
+            src: "assets/media/videos/obama_42_recomposed.mp4",
+            poster: "assets/media/images/obama_42_recomposed_poster.png",
+            label: "reenactment result",
+          },
+        ],
+      },
+      {
+        title: "Case ave1",
+        rows: [
+          { kind: "image", src: "assets/media/images/ave1.png", label: "source image" },
+          { kind: "placeholder", label: "" },
+          {
+            kind: "video",
+            src: "assets/media/videos/obama_ave1_recomposed.mp4",
+            poster: "assets/media/images/obama_ave1_recomposed_poster.png",
+            label: "reenactment result",
+          },
+        ],
+      },
+      {
+        title: "Case cap",
+        rows: [
+          { kind: "image", src: "assets/media/images/cap.png", label: "source image" },
+          { kind: "placeholder", label: "" },
+          {
+            kind: "video",
+            src: "assets/media/videos/obama_cap_recomposed.mp4",
+            poster: "assets/media/images/obama_cap_recomposed_poster.png",
+            label: "reenactment result",
+          },
+        ],
+      },
+      {
+        title: "",
+        rows: [
+          { kind: "placeholder", label: "" },
+          { kind: "placeholder", label: "" },
+          { kind: "placeholder", label: "" },
+        ],
+      },
+    ],
+  },
+  baseline: {
+    intro: "",
+    captionA: "",
+    captionB: "",
+    carouselA: [{ kind: "placeholder" }, { kind: "placeholder" }, { kind: "placeholder" }],
+    carouselB: [{ kind: "placeholder" }, { kind: "placeholder" }, { kind: "placeholder" }],
+  },
+  moreResults: {
+    sections: {
+      a: [
+        { kind: "placeholder", label: "" },
+        { kind: "placeholder", label: "" },
+        { kind: "placeholder", label: "" },
+      ],
+      b: [
+        { kind: "placeholder", label: "" },
+        { kind: "placeholder", label: "" },
+        { kind: "placeholder", label: "" },
+      ],
+      c: [
+        { kind: "placeholder", label: "" },
+        { kind: "placeholder", label: "" },
+        { kind: "placeholder", label: "" },
+      ],
     },
-    {
-      kind: "video",
-      title: "Case cap",
-      description: "Recomposed panel with the correct source image, segmented driver, and segmented result.",
-      src: "assets/media/videos/obama_cap_recomposed.mp4",
-      poster: "assets/media/images/obama_cap_recomposed_poster.png",
-      expectedPath: "assets/media/videos/obama_cap_recomposed.mp4",
-    },
-  ],
-  figures: [],
+  },
 };
 
-function setLink(anchorId, href) {
-  const anchor = document.getElementById(anchorId);
-  if (!anchor) return;
+function setText(id, value) {
+  const node = document.getElementById(id);
+  if (!node) return;
 
-  if (href) {
-    anchor.href = href;
-    anchor.target = "_blank";
-    anchor.rel = "noreferrer";
-    return;
-  }
-
-  anchor.href = "#link-row";
-  anchor.classList.add("disabled");
-  anchor.setAttribute("aria-disabled", "true");
-}
-
-function createPlaceholder(expectedPath, kind) {
-  const wrapper = document.createElement("div");
-  wrapper.className = "media-placeholder";
-
-  const inner = document.createElement("div");
-  inner.className = "placeholder-inner";
-
-  const label = document.createElement("span");
-  label.className = "placeholder-label";
-  if (kind === "video") {
-    label.textContent = "Video Slot";
-  } else if (kind === "image") {
-    label.textContent = "Image Slot";
+  if (value) {
+    node.textContent = value;
+    node.classList.remove("is-hidden");
   } else {
-    label.textContent = "Media Slot";
+    node.classList.add("is-hidden");
   }
-
-  const path = document.createElement("p");
-  path.className = "placeholder-path";
-  path.textContent = expectedPath ? `Expected path: ${expectedPath}` : "Add a media file and update main.js";
-
-  inner.append(label, path);
-  wrapper.append(inner);
-  return wrapper;
 }
 
-function createMediaFrame(item) {
-  const frame = document.createElement("div");
-  frame.className = "media-frame";
-  const inferredKind = resolveKind(item);
+function createPlaceholder(square = false) {
+  const panel = document.createElement("div");
+  panel.className = `placeholder-panel${square ? " is-square" : ""}`;
+  return panel;
+}
 
-  if (!item.src) {
-    frame.append(createPlaceholder(item.expectedPath, inferredKind));
-    return frame;
+function createMedia(item) {
+  if (!item || item.kind === "placeholder" || !item.src) {
+    return createPlaceholder();
   }
 
-  if (inferredKind === "video") {
+  const shell = document.createElement("div");
+  shell.className = "media-shell";
+
+  if (item.kind === "video") {
     const video = document.createElement("video");
-    video.controls = true;
+    video.autoplay = true;
+    video.muted = true;
+    video.loop = true;
     video.playsInline = true;
-    video.preload = "metadata";
+    video.controls = true;
     video.src = item.src;
     if (item.poster) video.poster = item.poster;
-    frame.append(video);
-    return frame;
+    shell.append(video);
+    return shell;
   }
 
   const image = document.createElement("img");
   image.src = item.src;
-  image.alt = item.title;
+  image.alt = item.alt || "";
   image.loading = "lazy";
   image.decoding = "async";
-  frame.append(image);
-  return frame;
+  shell.append(image);
+  return shell;
 }
 
-function resolveKind(item) {
-  if (item.kind && item.kind !== "auto") return item.kind;
-  if (!item.src) return "auto";
-
-  const normalized = item.src.toLowerCase();
-  if (normalized.endsWith(".mp4") || normalized.endsWith(".webm") || normalized.endsWith(".mov")) {
-    return "video";
-  }
-
-  return "image";
+function renderSingleMedia(containerId, media, captionId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.replaceChildren(createMedia(media));
+  if (captionId) setText(captionId, media.caption);
 }
 
-function createMediaCard(item) {
-  const card = document.createElement("article");
-  card.className = "media-card";
+function renderHeroLogo() {
+  const logo = document.getElementById("hero-logo");
+  if (!logo) return;
 
-  card.append(createMediaFrame(item));
+  if (pageConfig.heroLogo) {
+    logo.src = pageConfig.heroLogo;
+    logo.classList.remove("is-hidden");
+  } else {
+    logo.classList.add("is-hidden");
+  }
+}
 
-  if (item.title || item.description) {
-    const copy = document.createElement("div");
-    copy.className = "media-copy";
+function renderInteractiveViewer() {
+  const container = document.getElementById("interactive-viewer");
+  if (!container) return;
 
-    if (item.title) {
-      const title = document.createElement("h4");
-      title.textContent = item.title;
-      copy.append(title);
-    }
+  const stage = document.createElement("div");
+  stage.className = "viewer-stage";
 
-    if (item.description) {
-      const description = document.createElement("p");
-      description.textContent = item.description;
-      copy.append(description);
-    }
+  const reference = document.createElement("div");
+  reference.className = "viewer-reference";
+  if (pageConfig.interactiveViewer.referenceImage) {
+    const image = document.createElement("img");
+    image.src = pageConfig.interactiveViewer.referenceImage;
+    image.alt = "Reference image";
+    reference.append(image);
+  } else {
+    reference.append(createPlaceholder(true));
+  }
+  const refLabel = document.createElement("p");
+  refLabel.className = "viewer-label";
+  refLabel.textContent = "";
+  reference.append(refLabel);
 
-    card.append(copy);
+  const canvasShell = document.createElement("div");
+  canvasShell.className = "viewer-canvas-shell";
+  if (pageConfig.interactiveViewer.fallbackVideo) {
+    const video = document.createElement("video");
+    video.className = "viewer-canvas";
+    video.autoplay = true;
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.controls = true;
+    video.src = pageConfig.interactiveViewer.fallbackVideo;
+    canvasShell.append(video);
+  } else {
+    const canvas = document.createElement("div");
+    canvas.className = "viewer-canvas";
+    canvasShell.append(canvas);
   }
 
+  stage.append(reference, canvasShell);
+
+  const previews = document.createElement("div");
+  previews.className = "viewer-previews";
+  for (let index = 0; index < pageConfig.interactiveViewer.thumbnails; index += 1) {
+    const thumb = document.createElement("div");
+    thumb.className = "viewer-thumb";
+    previews.append(thumb);
+  }
+
+  container.replaceChildren(stage, previews);
+}
+
+function createGalleryItem(slide) {
+  const item = document.createElement("div");
+  item.className = "item item-video3";
+
+  if (slide.title) {
+    const title = document.createElement("h2");
+    title.className = "title is-4 gallery-item-title";
+    title.textContent = slide.title;
+    item.append(title);
+  }
+
+  const stack = document.createElement("div");
+  stack.className = "gallery-stack";
+
+  slide.rows.forEach((row, index) => {
+    stack.append(createMedia(row));
+
+    if (row.label) {
+      const label = document.createElement("h2");
+      label.className = "subtitle has-text-centered is-max-desktop gallery-row-label";
+      label.textContent = row.label;
+      stack.append(label);
+    }
+
+    if (index !== slide.rows.length - 1) {
+      const spacer = document.createElement("hr");
+      spacer.className = "gallery-spacer";
+      spacer.style.border = "none";
+      spacer.style.background = "transparent";
+      stack.append(spacer);
+    }
+  });
+
+  item.append(stack);
+  return item;
+}
+
+function renderGallery() {
+  setText("gallery-caption", pageConfig.gallery.caption);
+  const container = document.getElementById("gallery-carousel");
+  if (!container) return;
+  container.replaceChildren(...pageConfig.gallery.slides.map(createGalleryItem));
+}
+
+function createBaselineItem(itemConfig) {
+  const item = document.createElement("div");
+  item.className = "item item-video3";
+  item.append(createMedia(itemConfig));
+  return item;
+}
+
+function renderBaseline() {
+  setText("baseline-intro", pageConfig.baseline.intro);
+  setText("baseline-caption-a", pageConfig.baseline.captionA);
+  setText("baseline-caption-b", pageConfig.baseline.captionB);
+
+  const carouselA = document.getElementById("baseline-carousel-a");
+  const carouselB = document.getElementById("baseline-carousel-b");
+  if (carouselA) {
+    carouselA.replaceChildren(...pageConfig.baseline.carouselA.map(createBaselineItem));
+  }
+  if (carouselB) {
+    carouselB.replaceChildren(...pageConfig.baseline.carouselB.map(createBaselineItem));
+  }
+}
+
+function createMoreResultsCard(itemConfig) {
+  const card = document.createElement("div");
+  card.className = "more-results-card";
+  card.append(createMedia(itemConfig));
+  if (itemConfig.label) {
+    const label = document.createElement("h2");
+    label.className = "subtitle has-text-centered is-max-desktop";
+    label.textContent = itemConfig.label;
+    card.append(label);
+  }
   return card;
 }
 
-function createCarouselSlide(item) {
-  const slide = document.createElement("article");
-  slide.className = "carousel-slide";
+function renderMoreResults() {
+  const map = {
+    a: "more-results-a",
+    b: "more-results-b",
+    c: "more-results-c",
+  };
 
-  const card = document.createElement("div");
-  card.className = "carousel-card";
-
-  const frame = document.createElement("div");
-  frame.className = "carousel-frame";
-
-  if (!item.src) {
-    frame.append(createPlaceholder(item.expectedPath, "video"));
-  } else {
-    const video = document.createElement("video");
-    video.controls = true;
-    video.playsInline = true;
-    video.preload = "metadata";
-    video.src = item.src;
-    if (item.poster) video.poster = item.poster;
-    frame.append(video);
-  }
-
-  const copy = document.createElement("div");
-  copy.className = "carousel-copy";
-
-  const title = document.createElement("h4");
-  title.textContent = item.title;
-
-  const description = document.createElement("p");
-  description.textContent = item.description;
-
-  copy.append(title, description);
-  card.append(frame, copy);
-  slide.append(card);
-  return slide;
+  Object.entries(map).forEach(([key, id]) => {
+    const container = document.getElementById(id);
+    if (!container) return;
+    const items = pageConfig.moreResults.sections[key] || [];
+    container.replaceChildren(...items.map(createMoreResultsCard));
+  });
 }
 
-function renderVideoCarousel(containerId, items) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
+function initCarousels() {
+  if (!window.bulmaCarousel) return;
 
-  const slides = items.length ? items : [
-    {
-      title: "Video slot",
-      description: "Add a video and update main.js",
-      src: "",
-      expectedPath: "assets/media/videos/example.mp4",
-    },
-  ];
-
-  const shell = document.createElement("div");
-  shell.className = "carousel-shell";
-
-  const prevButton = document.createElement("button");
-  prevButton.className = "carousel-arrow carousel-arrow-prev";
-  prevButton.type = "button";
-  prevButton.textContent = "‹";
-  prevButton.setAttribute("aria-label", "Previous video");
-
-  const nextButton = document.createElement("button");
-  nextButton.className = "carousel-arrow carousel-arrow-next";
-  nextButton.type = "button";
-  nextButton.textContent = "›";
-  nextButton.setAttribute("aria-label", "Next video");
-
-  const viewport = document.createElement("div");
-  viewport.className = "carousel-viewport";
-
-  const track = document.createElement("div");
-  track.className = "carousel-track";
-  slides.forEach((item) => track.append(createCarouselSlide(item)));
-  viewport.append(track);
-
-  const footer = document.createElement("div");
-  footer.className = "carousel-footer";
-
-  const dots = document.createElement("div");
-  dots.className = "carousel-dots";
-
-  const status = document.createElement("div");
-  status.className = "carousel-status";
-
-  let currentIndex = 0;
-
-  function pauseInactiveVideos() {
-    const videos = track.querySelectorAll("video");
-    videos.forEach((video, index) => {
-      if (index !== currentIndex) video.pause();
-    });
-  }
-
-  function updateCarousel() {
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-    prevButton.disabled = slides.length <= 1;
-    nextButton.disabled = slides.length <= 1;
-    status.textContent = `${currentIndex + 1} / ${slides.length}`;
-
-    dots.querySelectorAll(".carousel-dot").forEach((dot, index) => {
-      dot.classList.toggle("is-active", index === currentIndex);
-    });
-
-    pauseInactiveVideos();
-  }
-
-  slides.forEach((item, index) => {
-    const dot = document.createElement("button");
-    dot.className = "carousel-dot";
-    dot.type = "button";
-    dot.setAttribute("aria-label", `Go to video ${index + 1}: ${item.title}`);
-    dot.addEventListener("click", () => {
-      currentIndex = index;
-      updateCarousel();
-    });
-    dots.append(dot);
+  window.bulmaCarousel.attach(".carousel", {
+    slidesToScroll: 1,
+    slidesToShow: 1,
+    loop: true,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 5000,
   });
-
-  prevButton.addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-    updateCarousel();
-  });
-
-  nextButton.addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % slides.length;
-    updateCarousel();
-  });
-
-  shell.append(prevButton, viewport, nextButton);
-  footer.append(dots, status);
-  container.append(shell, footer);
-
-  updateCarousel();
 }
 
-function renderCollection(containerId, items) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  items.forEach((item) => container.append(createMediaCard(item)));
-}
-
-setLink("paper-link", pageConfig.links.paper);
-setLink("code-link", pageConfig.links.code);
-setLink("supp-link", pageConfig.links.supplementaryPdf);
-setLink("arxiv-link", pageConfig.links.arxiv);
-
-renderCollection("teaser-grid", pageConfig.teaser);
-renderCollection("overview-grid", pageConfig.overviewFigure);
-renderVideoCarousel("video-carousel", pageConfig.videos);
+document.addEventListener("DOMContentLoaded", () => {
+  renderHeroLogo();
+  renderSingleMedia("teaser-media", pageConfig.teaser, "teaser-caption");
+  renderSingleMedia("overview-media", pageConfig.overview, "overview-caption");
+  renderInteractiveViewer();
+  renderSingleMedia("method-primary", pageConfig.method.primary, "method-primary-caption");
+  renderSingleMedia("method-secondary", pageConfig.method.secondary, "method-secondary-caption");
+  renderGallery();
+  renderBaseline();
+  renderMoreResults();
+  initCarousels();
+});
