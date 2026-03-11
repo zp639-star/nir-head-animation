@@ -1,5 +1,5 @@
 body {
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Times New Roman", Times, serif;
   color: #1a1a1a;
 }
 
@@ -9,7 +9,7 @@ body {
 .section-title,
 .section-subtitle,
 .viewer-title {
-  font-family: "Google Sans", sans-serif;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .hero-column {
@@ -45,6 +45,7 @@ body {
 
 .section-caption {
   margin-top: 1rem;
+  text-align: left;
 }
 
 .media-shell {

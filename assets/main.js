@@ -5,7 +5,7 @@ const pageConfig = {
     src: "assets/media/images/teaser.png",
     poster: "",
     caption:
-      "Given a single input image, our method reconstructs an animatable 3D Gaussian head by first recovering a Neutral Identity Representation (NIR) that removes source expression and pose while preserving identity. This representation enables faithful expression transfer from driving inputs. In contrast, existing methods such as LAM (He et al., 2025) often suffer from source-expression leakage and identity distortion.",
+      "Overview: Given a single input image, our method reconstructs an animatable 3D Gaussian head by first recovering a Neutral Identity Representation (NIR) that removes source expression and pose while preserving identity. This representation enables faithful expression transfer from driving inputs. In contrast, existing methods such as LAM (He et al., 2025) often suffer from source-expression leakage and identity distortion.",
   },
   interactiveViewer: {
     referenceImage: "",
@@ -18,7 +18,7 @@ const pageConfig = {
       src: "assets/media/images/method-2.png",
       poster: "",
       caption:
-        "Given a single source image, our method reconstructs a Neutral Identity Representation (NIR), an expression-neutral Gaussian head that removes transient facial motions while preserving identity-specific geometry and appearance. Expressions from the driving image are then transferred through 3DMM-based motion parameters with identity-aware refinement, enabling natural and identity-consistent reenactment across diverse expressions.",
+        "Pipeline overview: Given a single source image, our method reconstructs a Neutral Identity Representation (NIR), an expression-neutral Gaussian head that removes transient facial motions while preserving identity-specific geometry and appearance. Expressions from the driving image are then transferred through 3DMM-based motion parameters with identity-aware refinement, enabling natural and identity-consistent reenactment across diverse expressions.",
     },
     secondary: {
       title: "",
