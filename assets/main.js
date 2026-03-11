@@ -8,8 +8,8 @@ const pageConfig = {
   teaser: [
     {
       kind: "auto",
-      title: "Teaser Figure",
-      description: "Main visual summary of Neutral Identity Representation and expression transfer.",
+      title: "",
+      description: "",
       src: "assets/media/images/teaser.png",
       poster: "",
       expectedPath: "assets/media/images/teaser.png",
@@ -18,8 +18,8 @@ const pageConfig = {
   overviewFigure: [
     {
       kind: "image",
-      title: "Pipeline overview",
-      description: "Main pipeline figure for the two-stage deformation and neutral identity representation workflow.",
+      title: "",
+      description: "",
       src: "assets/media/images/method-2.png",
       expectedPath: "assets/media/images/method-2.png",
     },
@@ -50,22 +50,7 @@ const pageConfig = {
       expectedPath: "assets/media/videos/obama_cap_recomposed.mp4",
     },
   ],
-  figures: [
-    {
-      kind: "image",
-      title: "Visual comparison",
-      description: "Side-by-side results across methods or expression categories.",
-      src: "",
-      expectedPath: "assets/media/images/comparison-grid.png",
-    },
-    {
-      kind: "image",
-      title: "Additional supplemental figure",
-      description: "Use this slot for an ablation panel, per-subject breakdown, or failure analysis.",
-      src: "",
-      expectedPath: "assets/media/images/supp-figure-01.png",
-    },
-  ],
+  figures: [],
   bibtex: `@article{luo2026nir,
   title   = {Learning Neutral Identity Representations for Single-Image Head Animation},
   author  = {Luo, Yiming and Yang, Molan and Ghosh, Abhijeet},
@@ -162,17 +147,27 @@ function createMediaCard(item) {
   const card = document.createElement("article");
   card.className = "media-card";
 
-  const copy = document.createElement("div");
-  copy.className = "media-copy";
+  card.append(createMediaFrame(item));
 
-  const title = document.createElement("h4");
-  title.textContent = item.title;
+  if (item.title || item.description) {
+    const copy = document.createElement("div");
+    copy.className = "media-copy";
 
-  const description = document.createElement("p");
-  description.textContent = item.description;
+    if (item.title) {
+      const title = document.createElement("h4");
+      title.textContent = item.title;
+      copy.append(title);
+    }
 
-  copy.append(title, description);
-  card.append(createMediaFrame(item), copy);
+    if (item.description) {
+      const description = document.createElement("p");
+      description.textContent = item.description;
+      copy.append(description);
+    }
+
+    card.append(copy);
+  }
+
   return card;
 }
 
@@ -346,5 +341,4 @@ setLink("arxiv-link", pageConfig.links.arxiv);
 renderCollection("teaser-grid", pageConfig.teaser);
 renderCollection("overview-grid", pageConfig.overviewFigure);
 renderVideoCarousel("video-carousel", pageConfig.videos);
-renderCollection("figure-grid", pageConfig.figures);
 bindBibtex();
