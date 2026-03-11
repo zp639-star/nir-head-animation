@@ -75,6 +75,10 @@ pre {
   white-space: nowrap;
 }
 
+.hero-teaser {
+  margin-top: 28px;
+}
+
 .section-block {
   margin-top: 54px;
   padding-top: 28px;
@@ -380,42 +384,6 @@ pre {
   line-height: 1.55;
 }
 
-.citation-block {
-  margin-bottom: 24px;
-}
-
-.citation-box {
-  width: min(100%, 920px);
-  margin: 24px auto 0;
-  position: relative;
-}
-
-.copy-button {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: #ffffff;
-  padding: 8px 12px;
-  font: inherit;
-  cursor: pointer;
-}
-
-.copy-button:hover {
-  border-color: #c6c6c6;
-}
-
-#bibtex-block {
-  margin: 0;
-  padding: 22px;
-  border-radius: var(--radius);
-  background: #f7f7f7;
-  border: 1px solid var(--line);
-  overflow-x: auto;
-  line-height: 1.7;
-}
-
 @media (max-width: 900px) {
   .pipeline-grid,
   .media-grid {
@@ -441,12 +409,7 @@ pre {
     max-width: none;
   }
 
-  .publication-authors {
-    line-height: 1.8;
-  }
-
-  .copy-button {
-    position: static;
-    margin-bottom: 12px;
+  .hero-teaser {
+    margin-top: 22px;
   }
 }

@@ -51,12 +51,6 @@ const pageConfig = {
     },
   ],
   figures: [],
-  bibtex: `@article{luo2026nir,
-  title   = {Learning Neutral Identity Representations for Single-Image Head Animation},
-  author  = {Luo, Yiming and Yang, Molan and Ghosh, Abhijeet},
-  journal = {To be updated},
-  year    = {2026}
-}`,
 };
 
 function setLink(anchorId, href) {
@@ -310,29 +304,6 @@ function renderCollection(containerId, items) {
   items.forEach((item) => container.append(createMediaCard(item)));
 }
 
-function bindBibtex() {
-  const bibtexBlock = document.getElementById("bibtex-block");
-  const copyButton = document.getElementById("copy-bibtex");
-  if (!bibtexBlock || !copyButton) return;
-
-  bibtexBlock.textContent = pageConfig.bibtex;
-
-  copyButton.addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(pageConfig.bibtex);
-      copyButton.textContent = "Copied";
-      window.setTimeout(() => {
-        copyButton.textContent = "Copy BibTeX";
-      }, 1200);
-    } catch {
-      copyButton.textContent = "Copy failed";
-      window.setTimeout(() => {
-        copyButton.textContent = "Copy BibTeX";
-      }, 1200);
-    }
-  });
-}
-
 setLink("paper-link", pageConfig.links.paper);
 setLink("code-link", pageConfig.links.code);
 setLink("supp-link", pageConfig.links.supplementaryPdf);
@@ -341,4 +312,3 @@ setLink("arxiv-link", pageConfig.links.arxiv);
 renderCollection("teaser-grid", pageConfig.teaser);
 renderCollection("overview-grid", pageConfig.overviewFigure);
 renderVideoCarousel("video-carousel", pageConfig.videos);
-bindBibtex();
