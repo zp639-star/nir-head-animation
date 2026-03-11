@@ -33,52 +33,41 @@ const pageConfig = {
   },
   gallery: {
     caption: "",
-    slides: [
+    pages: [
       {
-        title: "Case 42",
-        rows: [
-          { kind: "image", src: "assets/media/images/42.png", label: "source image" },
-          { kind: "placeholder", label: "" },
+        items: [
           {
-            kind: "video",
-            src: "assets/media/videos/obama_42_recomposed.mp4",
-            poster: "assets/media/images/obama_42_recomposed_poster.png",
-            label: "reenactment result",
+            title: "Case 42",
+            source: { kind: "image", src: "assets/media/images/42.png" },
+            result: {
+              kind: "video",
+              src: "assets/media/videos/obama_42_recomposed.mp4",
+              poster: "assets/media/images/obama_42_recomposed_poster.png",
+            },
           },
-        ],
-      },
-      {
-        title: "Case ave1",
-        rows: [
-          { kind: "image", src: "assets/media/images/ave1.png", label: "source image" },
-          { kind: "placeholder", label: "" },
           {
-            kind: "video",
-            src: "assets/media/videos/obama_ave1_recomposed.mp4",
-            poster: "assets/media/images/obama_ave1_recomposed_poster.png",
-            label: "reenactment result",
+            title: "Case ave1",
+            source: { kind: "image", src: "assets/media/images/ave1.png" },
+            result: {
+              kind: "video",
+              src: "assets/media/videos/obama_ave1_recomposed.mp4",
+              poster: "assets/media/images/obama_ave1_recomposed_poster.png",
+            },
           },
-        ],
-      },
-      {
-        title: "Case cap",
-        rows: [
-          { kind: "image", src: "assets/media/images/cap.png", label: "source image" },
-          { kind: "placeholder", label: "" },
           {
-            kind: "video",
-            src: "assets/media/videos/obama_cap_recomposed.mp4",
-            poster: "assets/media/images/obama_cap_recomposed_poster.png",
-            label: "reenactment result",
+            title: "Case cap",
+            source: { kind: "image", src: "assets/media/images/cap.png" },
+            result: {
+              kind: "video",
+              src: "assets/media/videos/obama_cap_recomposed.mp4",
+              poster: "assets/media/images/obama_cap_recomposed_poster.png",
+            },
           },
-        ],
-      },
-      {
-        title: "",
-        rows: [
-          { kind: "placeholder", label: "" },
-          { kind: "placeholder", label: "" },
-          { kind: "placeholder", label: "" },
+          {
+            title: "",
+            source: { kind: "placeholder" },
+            result: { kind: "placeholder" },
+          },
         ],
       },
     ],
@@ -231,40 +220,52 @@ function renderInteractiveViewer() {
   container.replaceChildren(stage, previews);
 }
 
-function createGalleryItem(slide) {
+function createGalleryCase(caseItem) {
+  const card = document.createElement("div");
+  card.className = "gallery-case";
+
+  if (caseItem.title) {
+    const title = document.createElement("h2");
+    title.className = "title is-5 gallery-case-title";
+    title.textContent = caseItem.title;
+    card.append(title);
+  }
+
+  const source = createMedia(caseItem.source);
+  source.classList.add("gallery-case-media");
+  card.append(source);
+
+  const sourceLabel = document.createElement("h2");
+  sourceLabel.className = "subtitle has-text-centered is-max-desktop gallery-row-label";
+  sourceLabel.textContent = caseItem.source.kind === "placeholder" ? "" : "source image";
+  card.append(sourceLabel);
+
+  const spacer = document.createElement("hr");
+  spacer.className = "gallery-spacer";
+  spacer.style.border = "none";
+  spacer.style.background = "transparent";
+  card.append(spacer);
+
+  const result = createMedia(caseItem.result);
+  result.classList.add("gallery-case-media");
+  card.append(result);
+
+  const resultLabel = document.createElement("h2");
+  resultLabel.className = "subtitle has-text-centered is-max-desktop gallery-row-label";
+  resultLabel.textContent = caseItem.result.kind === "placeholder" ? "" : "reenactment result";
+  card.append(resultLabel);
+
+  return card;
+}
+
+function createGalleryItem(page) {
   const item = document.createElement("div");
   item.className = "item item-video3";
 
-  if (slide.title) {
-    const title = document.createElement("h2");
-    title.className = "title is-4 gallery-item-title";
-    title.textContent = slide.title;
-    item.append(title);
-  }
-
-  const stack = document.createElement("div");
-  stack.className = "gallery-stack";
-
-  slide.rows.forEach((row, index) => {
-    stack.append(createMedia(row));
-
-    if (row.label) {
-      const label = document.createElement("h2");
-      label.className = "subtitle has-text-centered is-max-desktop gallery-row-label";
-      label.textContent = row.label;
-      stack.append(label);
-    }
-
-    if (index !== slide.rows.length - 1) {
-      const spacer = document.createElement("hr");
-      spacer.className = "gallery-spacer";
-      spacer.style.border = "none";
-      spacer.style.background = "transparent";
-      stack.append(spacer);
-    }
-  });
-
-  item.append(stack);
+  const grid = document.createElement("div");
+  grid.className = "gallery-grid";
+  page.items.forEach((caseItem) => grid.append(createGalleryCase(caseItem)));
+  item.append(grid);
   return item;
 }
 
@@ -272,7 +273,7 @@ function renderGallery() {
   setText("gallery-caption", pageConfig.gallery.caption);
   const container = document.getElementById("gallery-carousel");
   if (!container) return;
-  container.replaceChildren(...pageConfig.gallery.slides.map(createGalleryItem));
+  container.replaceChildren(...pageConfig.gallery.pages.map(createGalleryItem));
 }
 
 function createBaselineItem(itemConfig) {
