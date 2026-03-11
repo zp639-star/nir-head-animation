@@ -157,16 +157,20 @@ pre {
   margin: 0 auto;
 }
 
+#teaser-grid .media-card,
 #overview-grid .media-card {
   overflow: visible;
 }
 
+#teaser-grid .media-frame,
 #overview-grid .media-frame {
   aspect-ratio: auto;
   padding: 18px;
   background: #ffffff;
 }
 
+#teaser-grid .media-frame img,
+#teaser-grid .media-frame video,
 #overview-grid .media-frame img {
   width: 100%;
   height: auto;
