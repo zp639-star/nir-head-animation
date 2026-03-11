@@ -25,6 +25,7 @@ const pageConfig = {
       caption: "",
     },
     secondary: {
+      title: "",
       kind: "image",
       src: "",
       poster: "",
@@ -148,11 +149,33 @@ function createMedia(item) {
   return shell;
 }
 
+function hasRenderableMedia(item) {
+  return Boolean(item && item.kind !== "placeholder" && item.src);
+}
+
 function renderSingleMedia(containerId, media, captionId) {
   const container = document.getElementById(containerId);
   if (!container) return;
   container.replaceChildren(createMedia(media));
   if (captionId) setText(captionId, media.caption);
+}
+
+function renderMethodSecondary() {
+  const block = document.getElementById("method-secondary-block");
+  const title = document.getElementById("method-secondary-title");
+  const media = pageConfig.method.secondary;
+
+  if (!block || !title) return;
+
+  const shouldShow = hasRenderableMedia(media) || Boolean(media.title) || Boolean(media.caption);
+  if (!shouldShow) {
+    block.classList.add("is-hidden");
+    return;
+  }
+
+  block.classList.remove("is-hidden");
+  setText("method-secondary-title", media.title);
+  renderSingleMedia("method-secondary", media, "method-secondary-caption");
 }
 
 function renderHeroLogo() {
@@ -345,7 +368,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderSingleMedia("overview-media", pageConfig.overview, "overview-caption");
   renderInteractiveViewer();
   renderSingleMedia("method-primary", pageConfig.method.primary, "method-primary-caption");
-  renderSingleMedia("method-secondary", pageConfig.method.secondary, "method-secondary-caption");
+  renderMethodSecondary();
   renderGallery();
   renderBaseline();
   renderMoreResults();
