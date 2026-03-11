@@ -7,12 +7,6 @@ const pageConfig = {
     caption:
       "Given a single input image, our method reconstructs an animatable 3D Gaussian head by first recovering a Neutral Identity Representation (NIR) that removes source expression and pose while preserving identity. This representation enables faithful expression transfer from driving inputs. In contrast, existing methods such as LAM (He et al., 2025) often suffer from source-expression leakage and identity distortion.",
   },
-  overview: {
-    kind: "image",
-    src: "assets/media/images/method-2.png",
-    poster: "",
-    caption: "",
-  },
   interactiveViewer: {
     referenceImage: "",
     fallbackVideo: "",
@@ -367,7 +361,6 @@ function initCarousels() {
 document.addEventListener("DOMContentLoaded", () => {
   renderHeroLogo();
   renderSingleMedia("teaser-media", pageConfig.teaser, "teaser-caption");
-  renderSingleMedia("overview-media", pageConfig.overview, "overview-caption");
   renderInteractiveViewer();
   renderSingleMedia("method-primary", pageConfig.method.primary, "method-primary-caption");
   renderMethodSecondary();
