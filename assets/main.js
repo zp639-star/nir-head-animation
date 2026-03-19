@@ -70,11 +70,23 @@ const pageConfig = {
     ],
   },
   baseline: {
-    intro: "",
-    captionA: "",
-    captionB: "",
-    carouselA: [{ kind: "placeholder" }, { kind: "placeholder" }, { kind: "placeholder" }],
-    carouselB: [{ kind: "placeholder" }, { kind: "placeholder" }, { kind: "placeholder" }],
+    intro: "Qualitative comparisons on cross-reenactment and side-by-side baseline evaluation.",
+    captionA: "Cross-reenactment results using both video drivers and image drivers.",
+    captionB: "Sequential comparison between our method and CAP4D.",
+    carouselA: [
+      {
+        kind: "video",
+        src: "assets/media/videos/cross_reenactment_results.mp4",
+        poster: "assets/media/images/cross_reenactment_results_poster.png",
+      },
+    ],
+    carouselB: [
+      {
+        kind: "video",
+        src: "assets/media/videos/comparison_all_sequential.mp4",
+        poster: "assets/media/images/comparison_all_sequential_poster.png",
+      },
+    ],
   },
   moreResults: {
     sections: {
@@ -84,9 +96,12 @@ const pageConfig = {
         { kind: "placeholder", label: "" },
       ],
       b: [
-        { kind: "placeholder", label: "" },
-        { kind: "placeholder", label: "" },
-        { kind: "placeholder", label: "" },
+        {
+          kind: "video",
+          src: "assets/media/videos/editing_reenactment.mp4",
+          poster: "assets/media/images/editing_reenactment_poster.png",
+          label: "",
+        },
       ],
       c: [
         { kind: "placeholder", label: "" },
@@ -341,6 +356,7 @@ function renderMoreResults() {
     const container = document.getElementById(id);
     if (!container) return;
     const items = pageConfig.moreResults.sections[key] || [];
+    container.dataset.count = String(items.length);
     container.replaceChildren(...items.map(createMoreResultsCard));
   });
 }

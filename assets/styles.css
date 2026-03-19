@@ -195,6 +195,10 @@ body {
   gap: 18px;
 }
 
+.more-results-grid[data-count="1"] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .more-results-card {
   display: grid;
   gap: 8px;
