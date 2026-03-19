@@ -70,23 +70,17 @@ const pageConfig = {
     ],
   },
   baseline: {
-    intro: "Qualitative comparisons on cross-reenactment and side-by-side baseline evaluation.",
-    captionA: "Cross-reenactment results using both video drivers and image drivers.",
-    captionB: "Sequential comparison between our method and CAP4D.",
+    intro: "Sequential side-by-side comparison between our method and CAP4D.",
+    captionA: "Comparison between our method and CAP4D.",
+    captionB: "",
     carouselA: [
-      {
-        kind: "video",
-        src: "assets/media/videos/cross_reenactment_results.mp4",
-        poster: "assets/media/images/cross_reenactment_results_poster.png",
-      },
-    ],
-    carouselB: [
       {
         kind: "video",
         src: "assets/media/videos/comparison_all_sequential.mp4",
         poster: "assets/media/images/comparison_all_sequential_poster.png",
       },
     ],
+    carouselB: [],
   },
   moreResults: {
     sections: {
@@ -104,9 +98,12 @@ const pageConfig = {
         },
       ],
       c: [
-        { kind: "placeholder", label: "" },
-        { kind: "placeholder", label: "" },
-        { kind: "placeholder", label: "" },
+        {
+          kind: "video",
+          src: "assets/media/videos/cross_reenactment_results.mp4",
+          poster: "assets/media/images/cross_reenactment_results_poster.png",
+          label: "",
+        },
       ],
     },
   },
@@ -325,10 +322,14 @@ function renderBaseline() {
   const carouselA = document.getElementById("baseline-carousel-a");
   const carouselB = document.getElementById("baseline-carousel-b");
   if (carouselA) {
-    carouselA.replaceChildren(...pageConfig.baseline.carouselA.map(createBaselineItem));
+    const items = pageConfig.baseline.carouselA || [];
+    carouselA.replaceChildren(...items.map(createBaselineItem));
+    carouselA.classList.toggle("is-hidden", items.length === 0);
   }
   if (carouselB) {
-    carouselB.replaceChildren(...pageConfig.baseline.carouselB.map(createBaselineItem));
+    const items = pageConfig.baseline.carouselB || [];
+    carouselB.replaceChildren(...items.map(createBaselineItem));
+    carouselB.classList.toggle("is-hidden", items.length === 0);
   }
 }
 
