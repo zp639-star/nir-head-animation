@@ -21,11 +21,12 @@ const pageConfig = {
         "Pipeline overview: Given a single source image, our method reconstructs a Neutral Identity Representation (NIR), an expression-neutral Gaussian head that removes transient facial motions while preserving identity-specific geometry and appearance. Expressions from the driving image are then transferred through 3DMM-based motion parameters with identity-aware refinement, enabling natural and identity-consistent reenactment across diverse expressions.",
     },
     secondary: {
-      title: "",
-      kind: "image",
-      src: "",
-      poster: "",
-      caption: "",
+      title: "Dynamic Pipeline",
+      kind: "video",
+      src: "assets/media/videos/dynamic_pipeline_overview.mp4",
+      poster: "assets/media/images/dynamic_pipeline_overview_poster.png",
+      caption:
+        "Dynamic pipeline: the source image is first restored to the Neutral Identity Representation and then animated into the final 4D Gaussian avatar.",
     },
   },
   gallery: {
