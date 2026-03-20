@@ -22,9 +22,9 @@ const pageConfig = {
     },
     secondary: {
       title: "Dynamic Pipeline",
-      kind: "image",
-      src: "assets/media/images/dynamic_pipeline_overview.png",
-      poster: "",
+      kind: "video",
+      src: "assets/media/videos/dynamic_pipeline_overview.mp4",
+      poster: "assets/media/images/dynamic_pipeline_overview_poster.png",
       caption:
         "Dynamic pipeline: the source image is first restored to the Neutral Identity Representation and then animated into the final 4D Gaussian avatar.",
     },
