@@ -131,6 +131,11 @@ const pageConfig = {
   },
 };
 
+const expressionRemovalSliderState = {
+  count: 0,
+  index: 0,
+};
+
 function setText(id, value) {
   const node = document.getElementById(id);
   if (!node) return;
@@ -355,20 +360,92 @@ function renderBaseline() {
   }
 }
 
-function createCarouselItem(itemConfig) {
-  const item = document.createElement("div");
-  item.className = "item item-video3";
-  item.append(createMedia(itemConfig));
-  return item;
+function createExpressionRemovalSlide(itemConfig) {
+  const slide = document.createElement("div");
+  slide.className = "expression-removal-slide";
+  slide.append(createMedia(itemConfig));
+  return slide;
+}
+
+function setExpressionRemovalIndex(index) {
+  const track = document.getElementById("expression-removal-track");
+  const dots = document.querySelectorAll(".expression-removal-dot");
+  if (!track || expressionRemovalSliderState.count === 0) return;
+
+  const nextIndex =
+    ((index % expressionRemovalSliderState.count) + expressionRemovalSliderState.count) %
+    expressionRemovalSliderState.count;
+
+  expressionRemovalSliderState.index = nextIndex;
+  track.style.transform = `translateX(-${nextIndex * 100}%)`;
+
+  dots.forEach((dot, dotIndex) => {
+    dot.classList.toggle("is-active", dotIndex === nextIndex);
+    dot.setAttribute("aria-current", dotIndex === nextIndex ? "true" : "false");
+  });
+}
+
+function bindExpressionRemovalSlider() {
+  const root = document.getElementById("expression-removal-slider");
+  const prev = document.getElementById("expression-removal-prev");
+  const next = document.getElementById("expression-removal-next");
+  const dots = document.getElementById("expression-removal-dots");
+
+  if (!root || !prev || !next || !dots || root.dataset.bound === "true") return;
+
+  prev.addEventListener("click", () => {
+    setExpressionRemovalIndex(expressionRemovalSliderState.index - 1);
+  });
+
+  next.addEventListener("click", () => {
+    setExpressionRemovalIndex(expressionRemovalSliderState.index + 1);
+  });
+
+  dots.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLButtonElement)) return;
+    const { index } = target.dataset;
+    if (!index) return;
+    setExpressionRemovalIndex(Number(index));
+  });
+
+  root.dataset.bound = "true";
 }
 
 function renderExpressionRemoval() {
   setText("expression-removal-caption", pageConfig.expressionRemoval.caption);
-  const container = document.getElementById("expression-removal-carousel");
-  if (!container) return;
+  const root = document.getElementById("expression-removal-slider");
+  const track = document.getElementById("expression-removal-track");
+  const dots = document.getElementById("expression-removal-dots");
+  const prev = document.getElementById("expression-removal-prev");
+  const next = document.getElementById("expression-removal-next");
+  if (!root || !track || !dots || !prev || !next) return;
+
   const items = pageConfig.expressionRemoval.slides || [];
-  container.replaceChildren(...items.map(createCarouselItem));
-  container.classList.toggle("is-hidden", items.length === 0);
+  track.replaceChildren(...items.map(createExpressionRemovalSlide));
+
+  dots.replaceChildren(
+    ...items.map((_, index) => {
+      const dot = document.createElement("button");
+      dot.className = "expression-removal-dot";
+      dot.type = "button";
+      dot.dataset.index = String(index);
+      dot.setAttribute("aria-label", `Go to expression removal slide ${index + 1}`);
+      dot.setAttribute("aria-current", "false");
+      return dot;
+    }),
+  );
+
+  expressionRemovalSliderState.count = items.length;
+  expressionRemovalSliderState.index = 0;
+
+  root.classList.toggle("is-hidden", items.length === 0);
+  dots.classList.toggle("is-hidden", items.length <= 1);
+  prev.disabled = items.length <= 1;
+  next.disabled = items.length <= 1;
+
+  bindExpressionRemovalSlider();
+  setExpressionRemovalIndex(0);
 }
 
 function createMoreResultsCard(itemConfig) {
