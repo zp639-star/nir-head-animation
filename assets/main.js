@@ -83,6 +83,27 @@ const pageConfig = {
     ],
     carouselB: [],
   },
+  expressionRemoval: {
+    caption: "Top row: source images. Bottom row: expression-neutral results.",
+    slides: [
+      {
+        kind: "image",
+        src: "assets/media/images/supp_exp1_slide_1.png",
+      },
+      {
+        kind: "image",
+        src: "assets/media/images/supp_exp1_slide_2.png",
+      },
+      {
+        kind: "image",
+        src: "assets/media/images/supp_exp1_slide_3.png",
+      },
+      {
+        kind: "image",
+        src: "assets/media/images/supp_exp1_slide_4.png",
+      },
+    ],
+  },
   moreResults: {
     sections: {
       a: [
@@ -334,6 +355,22 @@ function renderBaseline() {
   }
 }
 
+function createCarouselItem(itemConfig) {
+  const item = document.createElement("div");
+  item.className = "item item-video3";
+  item.append(createMedia(itemConfig));
+  return item;
+}
+
+function renderExpressionRemoval() {
+  setText("expression-removal-caption", pageConfig.expressionRemoval.caption);
+  const container = document.getElementById("expression-removal-carousel");
+  if (!container) return;
+  const items = pageConfig.expressionRemoval.slides || [];
+  container.replaceChildren(...items.map(createCarouselItem));
+  container.classList.toggle("is-hidden", items.length === 0);
+}
+
 function createMoreResultsCard(itemConfig) {
   const card = document.createElement("div");
   card.className = "more-results-card";
@@ -384,6 +421,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderMethodSecondary();
   renderGallery();
   renderBaseline();
+  renderExpressionRemoval();
   renderMoreResults();
   initCarousels();
 });
