@@ -7,11 +7,6 @@ const pageConfig = {
     caption:
       "Overview: Given a single input image, our method reconstructs an animatable 3D Gaussian head by first recovering a Neutral Identity Representation (NIR) that removes source expression and pose while preserving identity. This representation enables faithful expression transfer from driving inputs. In contrast, existing methods such as LAM (He et al., 2025) often suffer from source-expression leakage and identity distortion.",
   },
-  interactiveViewer: {
-    referenceImage: "",
-    fallbackVideo: "",
-    thumbnails: 18,
-  },
   method: {
     primary: {
       kind: "image",
@@ -226,59 +221,6 @@ function renderHeroLogo() {
   } else {
     logo.classList.add("is-hidden");
   }
-}
-
-function renderInteractiveViewer() {
-  const container = document.getElementById("interactive-viewer");
-  if (!container) return;
-
-  const stage = document.createElement("div");
-  stage.className = "viewer-stage";
-
-  const reference = document.createElement("div");
-  reference.className = "viewer-reference";
-  if (pageConfig.interactiveViewer.referenceImage) {
-    const image = document.createElement("img");
-    image.src = pageConfig.interactiveViewer.referenceImage;
-    image.alt = "Reference image";
-    reference.append(image);
-  } else {
-    reference.append(createPlaceholder(true));
-  }
-  const refLabel = document.createElement("p");
-  refLabel.className = "viewer-label";
-  refLabel.textContent = "";
-  reference.append(refLabel);
-
-  const canvasShell = document.createElement("div");
-  canvasShell.className = "viewer-canvas-shell";
-  if (pageConfig.interactiveViewer.fallbackVideo) {
-    const video = document.createElement("video");
-    video.className = "viewer-canvas";
-    video.autoplay = true;
-    video.muted = true;
-    video.loop = true;
-    video.playsInline = true;
-    video.controls = true;
-    video.src = pageConfig.interactiveViewer.fallbackVideo;
-    canvasShell.append(video);
-  } else {
-    const canvas = document.createElement("div");
-    canvas.className = "viewer-canvas";
-    canvasShell.append(canvas);
-  }
-
-  stage.append(reference, canvasShell);
-
-  const previews = document.createElement("div");
-  previews.className = "viewer-previews";
-  for (let index = 0; index < pageConfig.interactiveViewer.thumbnails; index += 1) {
-    const thumb = document.createElement("div");
-    thumb.className = "viewer-thumb";
-    previews.append(thumb);
-  }
-
-  container.replaceChildren(stage, previews);
 }
 
 function createGalleryCase(caseItem) {
@@ -496,7 +438,6 @@ function initCarousels() {
 document.addEventListener("DOMContentLoaded", () => {
   renderHeroLogo();
   renderSingleMedia("teaser-media", pageConfig.teaser, "teaser-caption");
-  renderInteractiveViewer();
   renderSingleMedia("method-primary", pageConfig.method.primary, "method-primary-caption");
   renderMethodSecondary();
   renderGallery();
