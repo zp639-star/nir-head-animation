@@ -171,8 +171,7 @@ body {
   min-width: 100%;
 }
 
-.expression-removal-slide .media-shell,
-#method-secondary .media-shell {
+.expression-removal-slide .media-shell {
   background: #ffffff;
 }
 
