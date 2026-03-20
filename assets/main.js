@@ -107,9 +107,12 @@ const pageConfig = {
   moreResults: {
     sections: {
       a: [
-        { kind: "placeholder", label: "" },
-        { kind: "placeholder", label: "" },
-        { kind: "placeholder", label: "" },
+        {
+          kind: "video",
+          src: "assets/media/videos/ironman_ablation.mp4",
+          poster: "assets/media/images/ironman_ablation_poster.png",
+          label: "",
+        },
       ],
       b: [
         {
