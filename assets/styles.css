@@ -152,6 +152,83 @@ body {
   font-size: 0;
 }
 
+.baseline-slider {
+  position: relative;
+}
+
+.baseline-viewport {
+  overflow: hidden;
+}
+
+.baseline-track {
+  display: flex;
+  transition: transform 0.35s ease;
+  will-change: transform;
+}
+
+.baseline-slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+}
+
+.baseline-slide .media-shell {
+  background: #ffffff;
+}
+
+.baseline-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #bcbcbc;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #111111;
+  font-size: 2rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transform: translateY(-50%);
+}
+
+#baseline-prev {
+  left: 12px;
+}
+
+#baseline-next {
+  right: 12px;
+}
+
+.baseline-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.baseline-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.baseline-dot {
+  width: 10px;
+  height: 10px;
+  border: none;
+  border-radius: 999px;
+  background: #c8c8c8;
+  padding: 0;
+  cursor: pointer;
+}
+
+.baseline-dot.is-active {
+  background: #111111;
+}
+
 .expression-removal-slider {
   position: relative;
 }
@@ -312,6 +389,19 @@ body {
   .expression-removal-arrow {
     width: 40px;
     height: 40px;
+  }
+
+  .baseline-arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  #baseline-prev {
+    left: 8px;
+  }
+
+  #baseline-next {
+    right: 8px;
   }
 
   #expression-removal-prev {

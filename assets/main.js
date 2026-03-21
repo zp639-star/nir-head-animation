@@ -149,6 +149,11 @@ const expressionRemovalSliderState = {
   index: 0,
 };
 
+const baselineSliderState = {
+  count: 0,
+  index: 0,
+};
+
 function setText(id, value) {
   const node = document.getElementById(id);
   if (!node) return;
@@ -294,11 +299,55 @@ function renderGallery() {
   container.replaceChildren(...pageConfig.gallery.pages.map(createGalleryItem));
 }
 
-function createBaselineItem(itemConfig) {
-  const item = document.createElement("div");
-  item.className = "item item-video3";
-  item.append(createMedia(itemConfig));
-  return item;
+function createBaselineSlide(itemConfig) {
+  const slide = document.createElement("div");
+  slide.className = "baseline-slide";
+  slide.append(createMedia(itemConfig));
+  return slide;
+}
+
+function setBaselineIndex(index) {
+  const track = document.getElementById("baseline-track");
+  const dots = document.querySelectorAll(".baseline-dot");
+  if (!track || baselineSliderState.count === 0) return;
+
+  const nextIndex =
+    ((index % baselineSliderState.count) + baselineSliderState.count) % baselineSliderState.count;
+
+  baselineSliderState.index = nextIndex;
+  track.style.transform = `translateX(-${nextIndex * 100}%)`;
+
+  dots.forEach((dot, dotIndex) => {
+    dot.classList.toggle("is-active", dotIndex === nextIndex);
+    dot.setAttribute("aria-current", dotIndex === nextIndex ? "true" : "false");
+  });
+}
+
+function bindBaselineSlider() {
+  const root = document.getElementById("baseline-slider");
+  const prev = document.getElementById("baseline-prev");
+  const next = document.getElementById("baseline-next");
+  const dots = document.getElementById("baseline-dots");
+
+  if (!root || !prev || !next || !dots || root.dataset.bound === "true") return;
+
+  prev.addEventListener("click", () => {
+    setBaselineIndex(baselineSliderState.index - 1);
+  });
+
+  next.addEventListener("click", () => {
+    setBaselineIndex(baselineSliderState.index + 1);
+  });
+
+  dots.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLButtonElement)) return;
+    const { index } = target.dataset;
+    if (!index) return;
+    setBaselineIndex(Number(index));
+  });
+
+  root.dataset.bound = "true";
 }
 
 function renderBaseline() {
@@ -306,18 +355,38 @@ function renderBaseline() {
   setText("baseline-caption-a", pageConfig.baseline.captionA);
   setText("baseline-caption-b", pageConfig.baseline.captionB);
 
-  const carouselA = document.getElementById("baseline-carousel-a");
-  const carouselB = document.getElementById("baseline-carousel-b");
-  if (carouselA) {
-    const items = pageConfig.baseline.carouselA || [];
-    carouselA.replaceChildren(...items.map(createBaselineItem));
-    carouselA.classList.toggle("is-hidden", items.length === 0);
-  }
-  if (carouselB) {
-    const items = pageConfig.baseline.carouselB || [];
-    carouselB.replaceChildren(...items.map(createBaselineItem));
-    carouselB.classList.toggle("is-hidden", items.length === 0);
-  }
+  const root = document.getElementById("baseline-slider");
+  const track = document.getElementById("baseline-track");
+  const dots = document.getElementById("baseline-dots");
+  const prev = document.getElementById("baseline-prev");
+  const next = document.getElementById("baseline-next");
+  if (!root || !track || !dots || !prev || !next) return;
+
+  const items = [...(pageConfig.baseline.carouselA || []), ...(pageConfig.baseline.carouselB || [])];
+  track.replaceChildren(...items.map(createBaselineSlide));
+
+  dots.replaceChildren(
+    ...items.map((_, index) => {
+      const dot = document.createElement("button");
+      dot.className = "baseline-dot";
+      dot.type = "button";
+      dot.dataset.index = String(index);
+      dot.setAttribute("aria-label", `Go to baseline comparison ${index + 1}`);
+      dot.setAttribute("aria-current", "false");
+      return dot;
+    }),
+  );
+
+  baselineSliderState.count = items.length;
+  baselineSliderState.index = 0;
+
+  root.classList.toggle("is-hidden", items.length === 0);
+  dots.classList.toggle("is-hidden", items.length <= 1);
+  prev.disabled = items.length <= 1;
+  next.disabled = items.length <= 1;
+
+  bindBaselineSlider();
+  setBaselineIndex(0);
 }
 
 function createExpressionRemovalSlide(itemConfig) {
