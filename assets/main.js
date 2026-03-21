@@ -66,14 +66,29 @@ const pageConfig = {
     ],
   },
   baseline: {
-    intro: "Sequential side-by-side comparison between our method and CAP4D.",
-    captionA: "Comparison between our method and CAP4D.",
+    intro: "",
+    captionA: "",
     captionB: "",
     carouselA: [
       {
         kind: "video",
-        src: "assets/media/videos/comparison_all_sequential.mp4",
-        poster: "assets/media/images/comparison_all_sequential_poster.png",
+        src: "assets/media/videos/baseline_30_comparison.mp4",
+        poster: "assets/media/images/baseline_30_comparison_poster.png",
+      },
+      {
+        kind: "video",
+        src: "assets/media/videos/baseline_32_comparison.mp4",
+        poster: "assets/media/images/baseline_32_comparison_poster.png",
+      },
+      {
+        kind: "video",
+        src: "assets/media/videos/baseline_33_comparison.mp4",
+        poster: "assets/media/images/baseline_33_comparison_poster.png",
+      },
+      {
+        kind: "video",
+        src: "assets/media/videos/baseline_42_comparison.mp4",
+        poster: "assets/media/images/baseline_42_comparison_poster.png",
       },
     ],
     carouselB: [],
