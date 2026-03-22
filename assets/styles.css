@@ -13,19 +13,31 @@ body {
 }
 
 .hero-column {
-  max-width: 760px;
+  max-width: 900px;
+}
+
+.hero-lockup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.hero-title-block {
+  text-align: left;
 }
 
 .hero-logo {
   display: block;
-  width: min(360px, 58vw);
-  min-width: 260px;
-  max-width: 100%;
-  margin: 0 auto 18px;
+  width: 136px;
+  min-width: 136px;
+  max-width: 136px;
+  margin: 0;
 }
 
 .publication-title {
   line-height: 1.15;
+  margin: 0;
 }
 
 .teaser .hero-body {
@@ -466,6 +478,21 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+  .hero-lockup {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .hero-title-block {
+    text-align: center;
+  }
+
+  .hero-logo {
+    width: 108px;
+    min-width: 108px;
+    max-width: 108px;
+  }
+
   .publication-title {
     font-size: 1.85rem;
   }

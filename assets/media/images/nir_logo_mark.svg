@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-labelledby="title desc">
+  <title id="title">NIR logo</title>
+  <desc id="desc">Face icon with colorful accents and NIR lettering.</desc>
+  <defs>
+    <linearGradient id="nir-blue-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e2f7a"/>
+      <stop offset="100%" stop-color="#0a5fd3"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="360" height="360" fill="none"/>
+
+  <g transform="translate(16 18)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M76 142 C58 145, 42 142, 24 132" stroke="#ef1c2f" stroke-width="16"/>
+    <path d="M72 182 C55 185, 36 182, 12 171" stroke="#f26b15" stroke-width="16"/>
+    <path d="M73 223 C56 225, 40 223, 18 213" stroke="#f8a600" stroke-width="16"/>
+
+    <path
+      d="M171 44
+         C119 44, 79 83, 79 138
+         L79 156
+         C79 205, 114 247, 162 258"
+      stroke="#1e3784"
+      stroke-width="16"
+    />
+
+    <path
+      d="M171 44
+         C224 44, 263 82, 263 137
+         L263 156
+         C263 204, 230 244, 183 257"
+      stroke="#1e3784"
+      stroke-width="16"
+      stroke-dasharray="165 22"
+    />
+
+    <path d="M171 46 V274" stroke="#1e3784" stroke-width="14"/>
+    <path d="M73 156 C69 166, 69 185, 76 204 C84 224, 99 229, 109 222" stroke="#1e3784" stroke-width="14"/>
+
+    <path d="M119 160 C132 144, 153 144, 166 160" stroke="#1e3784" stroke-width="13"/>
+    <circle cx="148" cy="173" r="10" fill="#1e3784" stroke="#1e3784" stroke-width="8"/>
+    <path d="M211 171 H233" stroke="#1e3784" stroke-width="15"/>
+    <path d="M128 236 C148 254, 175 257, 199 248" stroke="#1e3784" stroke-width="13"/>
+
+    <g fill="url(#nir-blue-gradient)" stroke="none">
+      <rect x="256" y="112" width="14" height="14" rx="2"/>
+      <rect x="271" y="127" width="13" height="13" rx="2"/>
+      <rect x="287" y="141" width="12" height="12" rx="2"/>
+      <rect x="251" y="145" width="12" height="12" rx="2"/>
+      <rect x="269" y="159" width="11" height="11" rx="2"/>
+      <rect x="285" y="174" width="10" height="10" rx="2"/>
+      <rect x="251" y="177" width="11" height="11" rx="2"/>
+      <rect x="266" y="191" width="10" height="10" rx="2"/>
+      <rect x="281" y="205" width="9" height="9" rx="2"/>
+      <circle cx="297" cy="111" r="5"/>
+      <circle cx="311" cy="125" r="7"/>
+      <circle cx="327" cy="139" r="5"/>
+      <circle cx="340" cy="156" r="6"/>
+      <circle cx="307" cy="173" r="8"/>
+      <circle cx="326" cy="192" r="9"/>
+      <circle cx="347" cy="211" r="5"/>
+      <circle cx="300" cy="219" r="7"/>
+      <circle cx="318" cy="237" r="6"/>
+    </g>
+  </g>
+
+  <g font-family="'Arial Black', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="84">
+    <text x="104" y="342" fill="#ef1c2f">N</text>
+    <text x="176" y="342" fill="#f8a600">I</text>
+    <text x="209" y="342" fill="#0b53c1">R</text>
+  </g>
+</svg>
