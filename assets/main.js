@@ -1,5 +1,5 @@
 const pageConfig = {
-  heroLogo: "assets/media/images/nir_logo_mark.svg",
+  heroLogo: "assets/media/images/nir_logo_mark.png",
   teaser: {
     kind: "image",
     src: "assets/media/images/teaser.png",
