@@ -73,23 +73,18 @@
                 Existing one-shot avatar methods typically animate avatars directly from representations reconstructed
                 from the input image. Since the input image inevitably contains facial expressions, the reconstructed
                 representation often entangles identity with source expressions, leading to residual source-expression
-                leakage that interferes with target motion during reenactment.
-              </p>
-              <p>
-                To address this issue, we propose learning a Neutral Identity Representation (NIR) for single-image
-                head animation. Instead of directly animating the reconstructed source avatar, our method first restores
-                the input head into the NIR, a canonical expression-neutral identity state that removes
-                expression-dependent variations while preserving identity-specific geometry and appearance. This
-                representation serves as the identity-only foundation for subsequent animation, preventing
-                source-expression interference when new expressions are introduced.
-              </p>
-              <p>
-                Building upon this representation, we introduce a two-stage deformation pipeline for expression transfer.
-                A coarse 3DMM-driven deformation first produces anatomically consistent facial motion, followed by an
-                identity-aware refinement module that injects identity-specific geometric details into the Gaussian avatar
-                representation. Experiments demonstrate that our approach significantly reduces source-expression leakage
-                and achieves more accurate and identity-consistent reenactment compared to existing one-shot avatar
-                methods.
+                leakage that interferes with target motion during reenactment. To address this issue, we propose
+                learning a Neutral Identity Representation (NIR) for single-image head animation. Instead of directly
+                animating the reconstructed source avatar, our method first restores the input head into the NIR, a
+                canonical expression-neutral identity state that removes expression-dependent variations while
+                preserving identity-specific geometry and appearance. This representation serves as the identity-only
+                foundation for subsequent animation, preventing source-expression interference when new expressions are
+                introduced. Building upon this representation, we introduce a two-stage deformation pipeline for
+                expression transfer. A coarse 3DMM-driven deformation first produces anatomically consistent facial
+                motion, followed by an identity-aware refinement module that injects identity-specific geometric
+                details into the Gaussian avatar representation. Experiments demonstrate that our approach
+                significantly reduces source-expression leakage and achieves more accurate and identity-consistent
+                reenactment compared to existing one-shot avatar methods.
               </p>
             </div>
           </div>
@@ -170,6 +165,10 @@
           <div class="more-results-stack">
             <div class="more-results-block">
               <h2 class="title is-4 section-subtitle">Expression Removal Results</h2>
+              <div id="expression-removal-guide" class="expression-removal-guide is-hidden">
+                <p id="expression-removal-row-top" class="expression-removal-guide-item is-hidden"></p>
+                <p id="expression-removal-row-bottom" class="expression-removal-guide-item is-hidden"></p>
+              </div>
               <h2 id="expression-removal-caption" class="subtitle is-max-desktop section-caption is-hidden"></h2>
               <div id="expression-removal-slider" class="expression-removal-slider is-hidden">
                 <button

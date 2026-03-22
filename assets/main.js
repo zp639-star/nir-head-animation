@@ -30,7 +30,7 @@ const pageConfig = {
       {
         items: [
           {
-            title: "Case 42",
+            title: "",
             source: { kind: "image", src: "assets/media/images/42.png" },
             result: {
               kind: "video",
@@ -39,7 +39,7 @@ const pageConfig = {
             },
           },
           {
-            title: "Case ave1",
+            title: "",
             source: { kind: "image", src: "assets/media/images/ave1.png" },
             result: {
               kind: "video",
@@ -48,18 +48,13 @@ const pageConfig = {
             },
           },
           {
-            title: "Case cap",
+            title: "",
             source: { kind: "image", src: "assets/media/images/cap.png" },
             result: {
               kind: "video",
               src: "assets/media/videos/obama_cap_recomposed.mp4",
               poster: "assets/media/images/obama_cap_recomposed_poster.png",
             },
-          },
-          {
-            title: "",
-            source: { kind: "placeholder" },
-            result: { kind: "placeholder" },
           },
         ],
       },
@@ -94,7 +89,9 @@ const pageConfig = {
     carouselB: [],
   },
   expressionRemoval: {
-    caption: "Top row: source images. Bottom row: expression-neutral results.",
+    rowTop: "Top row: source images with expression.",
+    rowBottom: "Bottom row: expression-neutral results.",
+    caption: "",
     slides: [
       {
         kind: "image",
@@ -392,8 +389,30 @@ function renderBaseline() {
 function createExpressionRemovalSlide(itemConfig) {
   const slide = document.createElement("div");
   slide.className = "expression-removal-slide";
-  slide.append(createMedia(itemConfig));
+
+  const frame = document.createElement("div");
+  frame.className = "expression-removal-frame";
+
+  const media = createMedia(itemConfig);
+  media.classList.add("expression-removal-media");
+  frame.append(media);
+  slide.append(frame);
+
   return slide;
+}
+
+function renderExpressionRemovalGuide() {
+  const guide = document.getElementById("expression-removal-guide");
+  const rowTop = document.getElementById("expression-removal-row-top");
+  const rowBottom = document.getElementById("expression-removal-row-bottom");
+
+  if (!guide || !rowTop || !rowBottom) return;
+
+  setText("expression-removal-row-top", pageConfig.expressionRemoval.rowTop);
+  setText("expression-removal-row-bottom", pageConfig.expressionRemoval.rowBottom);
+
+  const shouldShow = Boolean(pageConfig.expressionRemoval.rowTop || pageConfig.expressionRemoval.rowBottom);
+  guide.classList.toggle("is-hidden", !shouldShow);
 }
 
 function setExpressionRemovalIndex(index) {
@@ -442,6 +461,7 @@ function bindExpressionRemovalSlider() {
 }
 
 function renderExpressionRemoval() {
+  renderExpressionRemovalGuide();
   setText("expression-removal-caption", pageConfig.expressionRemoval.caption);
   const root = document.getElementById("expression-removal-slider");
   const track = document.getElementById("expression-removal-track");
